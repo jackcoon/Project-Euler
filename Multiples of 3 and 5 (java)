@@ -4,4 +4,82 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples
 of 3 or 5 below 1000.
 
+BRUTE FORCE WAY
 **/
+
+public class Mod35{
+
+     public static void main(String []args){
+        int sum = 0; 
+        for(int i = 0; i < 1000; i++){
+            if(i % 3 == 0 || i % 5 == 0){
+                sum = sum + i;
+            }
+        }
+        System.out.println(sum);
+     }
+     
+}
+
+/**
+MATHEMATICAL APPROACH WAY
+
+Mod 3 would be (1,3,6...999) or 3*(1,2,3,4,5...333)
+Mod 5 would be (1,5,10...995) or 5*(1,2,3,4,5...199)
+What could be done in order to have a O(1) time would be the
+Summation formula, n*(N*(N+1)/2) where N is p/n or in our 
+case (999/3) or (999/5). This was we can just add up the summations
+and subtract the overlapping numbers instead of using brute force and
+iterating through using the for loop. In order to also make it more
+modular I made a Least Common Multiple Value.
+
+**/
+
+
+public class Mod35{
+
+     public static void main(String []args){
+            int testNum = 999;
+            int result = 0;
+            int num1 = 3;
+            int num2 = 5;
+            int div = isPrime(num1, num2);
+            int LCM = (num1*num2) / div;
+            result = DivSum(num1,testNum) + DivSum(num2,testNum) - DivSum(LCM,testNum);
+            System.out.println("Result: " + result);
+     }
+
+    static int DivSum(int n, int p){
+        return(n * (((p/n) * ((p/n)+1) ) / 2));
+    }
+     
+    static int isPrime(int n, int p){
+        int mod1 = 0;
+        int mod2 = 0;
+        int small = 0;
+        int div = 1;
+        
+        if(n == p){
+            div = p;
+            return div;
+        }
+        
+        if(n < p){
+            small = n;
+        }
+        else{
+            small = p;
+        }
+        
+        for(int i = small; i >= 0; i--){
+            mod1 = n % i;
+            mod2 = p % i;
+            if(mod1 == 0 && mod2 == 0){
+                div = i;
+                return div;
+            }
+        }
+        
+     return div;   
+    } 
+}
