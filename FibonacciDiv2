@@ -6,13 +6,11 @@ By starting with 1 and 2, the first 10 terms will be:
 By considering the terms in the Fibonacci sequence whose values do 
 not exceed four million, find the sum of the even-valued terms.
 
-TODO: Missing the first value, my result is off by 2 which I know it is the first value.
-
 **/
 
 public class FibonacciDiv2{
-
      public static void main(String []args){
+
             int fib1 = 0;
             int fib2 = 1;
             int fib3 = 2;
@@ -23,7 +21,7 @@ public class FibonacciDiv2{
                     sum = sum + fib1;
                     System.out.println("SUM : " + sum);
                 }
-                
+
                 if(fib2 % mod == 0){
                     sum = sum + fib2;
                     System.out.println("SUM : " + sum);
@@ -34,32 +32,32 @@ public class FibonacciDiv2{
                     System.out.println("SUM : " + sum);
                 }
 
-            // while(fib1 <= 4000000 && fib2 <= 4000000 && fib3 <= 4000000){
+            while(fib1 <= 4000000 && fib2 <= 4000000 && fib3 <= 4000000){
+                if(fib1 < fib2 && fib1 < fib3){
+                    fib1 = fib2 + fib3;
+                    if(fib1 % mod == 0){
+                        sum = sum + fib1;
+                    }
+                }
+
+                else if(fib2 < fib1 && fib2 < fib1){
+                    fib2 = fib1 + fib3;
+                    if(fib2 % mod == 0){
+                        sum = sum + fib2;
+                    }
+                }
                 
-            //     if(fib1 < fib2 && fib1 < fib3){
-            //         fib1 = fib2 + fib3;
-            //         if(fib1 % mod == 0){
-            //             sum = sum + fib1;
-            //         }
-            //     }
-            //     else if(fib2 < fib1 && fib2 < fib1){
-            //         fib2 = fib1 + fib3;
-            //         if(fib2 % mod == 0){
-            //             sum = sum + fib2;
-            //         }
-            //     }
-            //     else if(fib3 < fib2 && fib3 < fib1){
-            //         fib3 = fib1 + fib2;
-            //         if(fib3 % mod == 0){
-            //             sum = sum + fib3;
-            //         }
-            //     }
-            //     else{
-            //         System.out.println("What");
-            //     }
-            // }
-            
-            System.out.println("FINISHED THE FIB SEQUENCE");
+                else if(fib3 < fib2 && fib3 < fib1){
+                    fib3 = fib1 + fib2;
+                    if(fib3 % mod == 0){
+                        sum = sum + fib3;
+                    }
+                }
+                
+                else{
+                    System.out.println("What");
+            }
+        }
             System.out.println("SUM : " + sum);
      }
 }
