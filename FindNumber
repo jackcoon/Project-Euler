@@ -1,0 +1,82 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
+public class Result {
+
+    /*
+     * Complete the 'findNumber' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts following parameters:
+     *  1. INTEGER_ARRAY arr
+     *  2. INTEGER k
+     */
+
+    public static String findNumber(List<Integer> arr, int k) {
+    // Write your code here
+            Collections.sort(arr);
+            int min = 0;
+            int max = arr.size();
+            
+            // for(int i = 0; i< arr.size(); i++){
+            //     System.out.print("I " + i);
+            //     System.out.print(" list value: " + arr.get(i) + "\n");
+            // }
+            
+            int iter = (min+max)/2;
+            int prev_iter = 0;
+            while(min <= max){
+                if(k == arr.get(iter)){
+                    return "YES";
+                }
+                else{
+                    System.out.print("ITER: " + iter);
+                    System.out.print(" Min: " + min);
+                    System.out.print(" Max: " + max + "\n");
+                    
+                    if(k < arr.get(iter)){
+                        prev_iter = iter;
+                        max = iter;
+                        iter = (min+max)/2;
+                        System.out.print("NEW ITER: " + iter + "\n");
+                    }
+                    else{
+                        prev_iter = iter;
+                        min = iter;
+                        iter = (min+max)/2;
+                        System.out.print("new iter: " + iter + "\n");
+                    }
+                }
+            }
+            System.out.print("\n");
+            return "NO";
+    }
+
+
+public static void main(String []args){
+        List<Integer> arr = new ArrayList<Integer>();
+        arr.add(1); // 1
+        arr.add(4); // 2
+        arr.add(5); // 3
+        arr.add(2); // 4
+        arr.add(7); // 5
+        arr.add(3); // 6
+        arr.add(6); // 7
+        arr.add(8); // 8
+        
+        int k = 1;
+        
+        String result = findNumber(arr, k);
+        System.out.print("RESULT " + result);
+     }
+     
+}
